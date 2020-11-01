@@ -10,8 +10,6 @@ import (
 	"os"
 	"path"
 	"strings"
-
-	"github.com/kyokomi/emoji"
 )
 
 func main() {
@@ -19,13 +17,11 @@ func main() {
 	infile, err := os.Open(fileName)
 
 	if err != nil {
-		emoji.Println(":angry:")
 		log.Printf("Failed to open file (%s). Error: %s", fileName, err)
 		panic(err.Error())
 	}
 	fileExtension := path.Ext(fileName)
 	if fileExtension != ".png" {
-		log.Println("got in here...")
 		panic(errors.New("Image format is not supported! Must be a .png file!"))
 	}
 	defer infile.Close()
@@ -52,8 +48,8 @@ func main() {
 		}
 	}
 
-	filenameWithoutExtension := strings.Split(fileName, fileExtension)[0]
-	newFileName := filenameWithoutExtension + "-grayscale.png"
+	fileNameWithoutExtension := strings.Split(fileName, fileExtension)[0]
+	newFileName := fileNameWithoutExtension + "-grayscale.png"
 
 	newFile, err := os.Create(newFileName)
 	if err != nil {
